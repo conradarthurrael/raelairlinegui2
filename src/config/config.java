@@ -3,6 +3,8 @@ package config;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public class config {
@@ -52,5 +54,71 @@ public class config {
         System.out.println("Error adding record: " + e.getMessage());
         return 0;
     }
+}
+    
+    public void viewRecords(String sqlQuery, String[] columnHeaders, String[] columnNames) {
+        // Check that columnHeaders and columnNames arrays are the same length
+        if (columnHeaders.length != columnNames.length) {
+            System.out.println("Error: Mismatch between column headers and column names.");
+            return;
+        }
+
+        try (Connection conn = this.connectDB();
+             PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            // Print the headers dynamically
+            StringBuilder headerLine = new StringBuilder();
+            headerLine.append("--------------------------------------------------------------------------------\n| ");
+            for (String header : columnHeaders) {
+                headerLine.append(String.format("%-20s | ", header)); // Adjust formatting as needed
+            }
+            headerLine.append("\n--------------------------------------------------------------------------------");
+
+            System.out.println(headerLine.toString());
+
+            // Print the rows dynamically based on the provided column names
+            while (rs.next()) {
+                StringBuilder row = new StringBuilder("| ");
+                for (String colName : columnNames) {
+                    String value = rs.getString(colName);
+                    row.append(String.format("%-20s | ", value != null ? value : "")); // Adjust formatting
+                }
+                System.out.println(row.toString());
+            }
+            System.out.println("--------------------------------------------------------------------------------");
+
+        } catch (SQLException e) {
+            System.out.println("Error retrieving records: " + e.getMessage());
+        }
+    }
+    
+    public java.util.List<java.util.Map<String, Object>> fetchRecords(String sqlQuery, Object... values) {
+    java.util.List<java.util.Map<String, Object>> records = new java.util.ArrayList<>();
+
+    try (Connection conn = this.connectDB();
+         PreparedStatement pstmt = conn.prepareStatement(sqlQuery)) {
+
+        for (int i = 0; i < values.length; i++) {
+            pstmt.setObject(i + 1, values[i]);
+        }
+
+        ResultSet rs = pstmt.executeQuery();
+        ResultSetMetaData metaData = rs.getMetaData();
+        int columnCount = metaData.getColumnCount();
+
+        while (rs.next()) {
+            java.util.Map<String, Object> row = new java.util.HashMap<>();
+            for (int i = 1; i <= columnCount; i++) {
+                row.put(metaData.getColumnName(i), rs.getObject(i));
+            }
+            records.add(row);
+        }
+
+    } catch (SQLException e) {
+        System.out.println("Error fetching records: " + e.getMessage());
+    }
+
+    return records;
 }
 }

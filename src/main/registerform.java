@@ -56,7 +56,7 @@ public class registerform extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
-        jPanel2.setBackground(new java.awt.Color(255, 153, 51));
+        jPanel2.setBackground(new java.awt.Color(102, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setText("Register Form");
@@ -295,7 +295,7 @@ public class registerform extends javax.swing.JFrame {
        password.setText("");
        contactno.setText("");
        type.setText("");
-       
+       JOptionPane.showMessageDialog(null, "Registered Successfully");
        loginform lf = new loginform();
        lf.setVisible(true);
        this.dispose();
