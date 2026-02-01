@@ -40,9 +40,9 @@ public class loginform extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         emaillogin = new javax.swing.JTextField();
-        passwordlogin = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        passwordlogin = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,8 +107,7 @@ public class loginform extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 265, 324, 38));
-        jPanel1.add(emaillogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 174, 233, 31));
-        jPanel1.add(passwordlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 223, 233, 31));
+        jPanel1.add(emaillogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 230, 30));
 
         jLabel6.setText("The airline system is a ticketing system and a management system.");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, -1, -1));
@@ -116,6 +115,7 @@ public class loginform extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel7.setText("All rights reserved 2026.");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, -1, -1));
+        jPanel1.add(passwordlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 230, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,6 +206,6 @@ public class loginform extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField passwordlogin;
+    private javax.swing.JPasswordField passwordlogin;
     // End of variables declaration//GEN-END:variables
 }
