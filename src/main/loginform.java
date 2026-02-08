@@ -5,8 +5,10 @@
  */
 package main;
 
+import admin.admindashboard;
 import config.config;
 import javax.swing.JOptionPane;
+import user.userdashboard;
 
 /**
  *
@@ -140,8 +142,15 @@ public class loginform extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         config con = new config();
+        String getemaillogin = emaillogin.getText();
+        String getpasswordlogin = passwordlogin.getText();
+        if(getemaillogin.isEmpty()||getpasswordlogin.isEmpty()){
+            JOptionPane.showMessageDialog(null, "All fields are required");
+        }
+        else{
+            String hashpass2 = con.hashPassword(getpasswordlogin);
         String login = "SELECT * FROM table_users WHERE user_email = ? AND user_password = ?";
-        java.util.List<java.util.Map<String,Object>> result = con.fetchRecords(login, emaillogin.getText(), passwordlogin.getText());
+        java.util.List<java.util.Map<String,Object>> result = con.fetchRecords(login, getemaillogin, hashpass2);
         if(result.isEmpty()){
             JOptionPane.showMessageDialog(null, "Invalid Credentials");
         }
@@ -152,10 +161,22 @@ public class loginform extends javax.swing.JFrame {
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "Login Success");
-                        dashboard dash = new dashboard();
+                        String type = "SELECT user_type FROM table_users";
+                        java.util.List<java.util.Map<String,Object>> type2 = con.fetchRecords(type);
+                        java.util.Map<String, Object> user2 = result.get(0);
+                        String type3 = user2.get("user_type").toString();
+                        if(type3.equals("manager")){
+                        admindashboard dash = new admindashboard();
                         dash.setVisible(true);
                         this.setVisible(false);
+                        }
+                        else{
+                            userdashboard userdash = new userdashboard();
+                            userdash.setVisible(true);
+                            this.setVisible(false);
+                        }
                     }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

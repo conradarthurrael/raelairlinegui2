@@ -286,8 +286,35 @@ public class registerform extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        config con = new config();
+       String getname = name.getText();
+       String getaddress = address.getText();
+       String getage = age.getText();
+       String getemail = email.getText();
+       String getpassword = password.getText();
+       String getcontactno = contactno.getText();
+       String gettype = type.getText();
+       
+       String emailpattern = "^[A-Za-z0-9+_.-]+@(gmail\\.com|yahoo\\.com|email\\.com)$";
+        
+        if(!getemail.matches(emailpattern)){
+            JOptionPane.showMessageDialog(null, "Invalid Email!");
+            return;
+            
+        }
+        
+       if(getname.isEmpty()||getaddress.isEmpty()||getage.isEmpty()||getemail.isEmpty()||getpassword.isEmpty()||getcontactno.isEmpty()||gettype.isEmpty()){
+           JOptionPane.showMessageDialog(null, "All fields are required");
+       }
+       else{
+           String emailvalidation = "SELECT * FROM table_users WHERE user_email = ?";
+        java.util.List<java.util.Map<String, Object>> result = con.fetchRecords(emailvalidation, getemail);
+        if (!result.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Email already exists. Please enter another email.");
+        }
+        else{
+       String hashpass = con.hashPassword(getpassword);
        String register = "INSERT INTO table_users(user_name, user_address, user_age, user_email, user_password, user_contactno, user_type, user_status)VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-       if(con.addRecord(register, name.getText(), address.getText(), age.getText(), email.getText(), password.getText(), contactno.getText(), type.getText(), "Pending")==1){
+       if(con.addRecord(register, getname, getaddress, getage, getemail, hashpass, getcontactno, gettype, "Pending")==1){
        name.setText("");
        address.setText("");
        age.setText("");
@@ -301,7 +328,9 @@ public class registerform extends javax.swing.JFrame {
        this.dispose();
        }
        else{
-           JOptionPane.showMessageDialog(null, "Invalid Credentials");
+           JOptionPane.showMessageDialog(null, "Empty Fields");
+       }
+        }
        }
     }//GEN-LAST:event_jButton1ActionPerformed
     
