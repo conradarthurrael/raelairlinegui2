@@ -8,6 +8,7 @@ package admin;
 import user.*;
 import main.*;
 import config.config;
+import config.session;
 import java.awt.Color;
 
 /**
@@ -22,7 +23,7 @@ public class usertable extends javax.swing.JFrame {
     public usertable() {
         initComponents();
         config con = new config();
-        String usertable = "SELECT user_name,user_address,user_age,user_email,user_type,user_status FROM table_users";
+        String usertable = "SELECT user_id,user_name,user_address,user_age,user_email,user_type,user_status FROM table_users";
         con.displayData(usertable, usertable2);
         jPanel5.setBackground(Color.GRAY);
     }
@@ -53,6 +54,13 @@ public class usertable extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         usertable2 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        textsearch = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -164,6 +172,9 @@ public class usertable extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(102, 102, 102));
         jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel6MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanel6MouseEntered(evt);
             }
@@ -195,6 +206,9 @@ public class usertable extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(102, 102, 102));
         jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel7MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanel7MouseEntered(evt);
             }
@@ -296,7 +310,69 @@ public class usertable extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(usertable2);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 730, 460));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 710, 380));
+
+        jButton1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton1.setText("Add");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, -1, -1));
+
+        jButton2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton2.setText("Update");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 90, -1));
+
+        jButton3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton3.setText("Delete");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, -1, -1));
+
+        textsearch.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        textsearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textsearchKeyReleased(evt);
+            }
+        });
+        jPanel1.add(textsearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 190, 30));
+
+        jButton4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton4.setText("Search");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 100, -1, -1));
+
+        jButton5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton5.setText("Approve");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, -1, -1));
+
+        jButton6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton6.setText("Disable");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
@@ -306,6 +382,8 @@ public class usertable extends javax.swing.JFrame {
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
         loginform login = new loginform();
+        session sess = session.getInstance();
+        sess.logout();
         login.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jPanel8MouseClicked
@@ -360,6 +438,80 @@ public class usertable extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jPanel4MouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        adduser au = new adduser();
+        au.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        updateuser uu = new updateuser();
+        uu.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        config con = new config();
+       int getuserid = usertable2.getSelectedRow();
+       if(getuserid==-1){
+           return;
+       }
+       int uid = Integer.parseInt(usertable2.getValueAt(getuserid, 0).toString());
+       String deleteuser = "DELETE FROM table_users WHERE user_id = ?";
+       con.deleteRecord(deleteuser, uid);
+       String refreshusertable = "SELECT user_id,user_name,user_address,user_age,user_email,user_type,user_status FROM table_users";
+        con.displayData(refreshusertable, usertable2);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void textsearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textsearchKeyReleased
+        config con = new config();
+        String searchtext = textsearch.getText();
+        String searchquery = "SELECT user_id,user_name,user_address,user_age,user_email,user_type,user_status FROM table_users WHERE "+"user_name LIKE '%"+searchtext+"%' ";
+        con.displayData(searchquery, usertable2);
+    }//GEN-LAST:event_textsearchKeyReleased
+
+    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+        airplanetable at = new airplanetable();
+        at.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jPanel6MouseClicked
+
+    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+        flighttable ft = new flighttable();
+        ft.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jPanel7MouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       config con = new config();
+       int getuserid = usertable2.getSelectedRow();
+       if(getuserid==-1){
+           return;
+       }
+       int uid = Integer.parseInt(usertable2.getValueAt(getuserid, 0).toString());
+       String approveuser = "UPDATE table_users SET user_status = ? WHERE user_id = ?";
+       con.updateRecord(approveuser,"Approved", uid);
+       String refreshusertable = "SELECT user_id,user_name,user_address,user_age,user_email,user_type,user_status FROM table_users";
+        con.displayData(refreshusertable, usertable2);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        config con = new config();
+       int getuserid = usertable2.getSelectedRow();
+       if(getuserid==-1){
+           return;
+       }
+       int uid = Integer.parseInt(usertable2.getValueAt(getuserid, 0).toString());
+       String disableuser = "UPDATE table_users SET user_status = ? WHERE user_id = ?";
+       con.updateRecord(disableuser,"Disabled", uid);
+       String refreshusertable = "SELECT user_id,user_name,user_address,user_age,user_email,user_type,user_status FROM table_users";
+        con.displayData(refreshusertable, usertable2);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -399,6 +551,12 @@ public class usertable extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -415,6 +573,7 @@ public class usertable extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField textsearch;
     private javax.swing.JTable usertable2;
     // End of variables declaration//GEN-END:variables
 }

@@ -294,7 +294,7 @@ public class registerform extends javax.swing.JFrame {
        String getcontactno = contactno.getText();
        String gettype = type.getText();
        
-       String emailpattern = "^[A-Za-z0-9+_.-]+@(gmail\\.com|yahoo\\.com|email\\.com)$";
+       String emailpattern = "^[A-Za-z0-9+_.-]+@(gmail\\.com|yahoo\\.com|email\\.com)$||''";
         
         if(!getemail.matches(emailpattern)){
             JOptionPane.showMessageDialog(null, "Invalid Email!");

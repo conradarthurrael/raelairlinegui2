@@ -7,6 +7,7 @@ package main;
 
 import admin.admindashboard;
 import config.config;
+import config.session;
 import javax.swing.JOptionPane;
 import user.userdashboard;
 
@@ -161,6 +162,18 @@ public class loginform extends javax.swing.JFrame {
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "Login Success");
+                        java.util.Map<String, Object> getinfo = result.get(0);
+                        String getusername = getinfo.get("user_name").toString();
+                        String getemail = getinfo.get("user_email").toString();
+                        String getuseraddress = getinfo.get("user_address").toString();
+                        String getusertype = getinfo.get("user_type").toString();
+                        String getuserid = getinfo.get("user_id").toString();
+                        session sess = session.getInstance();
+                        sess.setusername(getusername);
+                        sess.setuseremail(getemail);
+                        sess.setuseraddress(getuseraddress);
+                        sess.setusertype(getusertype);
+                        sess.setuserid(getuserid);
                         String type = "SELECT user_type FROM table_users";
                         java.util.List<java.util.Map<String,Object>> type2 = con.fetchRecords(type);
                         java.util.Map<String, Object> user2 = result.get(0);

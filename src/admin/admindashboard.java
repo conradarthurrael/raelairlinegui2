@@ -9,20 +9,30 @@ import main.*;
 import config.config;
 import config.session;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Conrad Arthur Rael
  */
 public class admindashboard extends javax.swing.JFrame {
-
-    /**
-     * Creates new form dashboard
-     */
+    private String useremail;
+    private config con;
+    
     public admindashboard() {
         initComponents();
+        session sess = session.getInstance();
+        jLabelname.setText("Name: "+sess.getusername());
+        jLabelemail.setText("Email: "+sess.getuseremail());
+        jLabeladdress.setText("Address: "+sess.getuseraddress());
+        jLabeltype.setText("Role: "+sess.getusertype());
+        config con = new config();
+        String countusers = "SELECT COUNT(*) AS total FROM table_users";
+        java.util.List<java.util.Map<String, Object>> count = con.fetchRecords(countusers);
+        Object total = count.get(0).get("total");
+        jLabel11.setText(total.toString());
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,6 +58,15 @@ public class admindashboard extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabelname = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabeladdress = new javax.swing.JLabel();
+        jLabelemail = new javax.swing.JLabel();
+        jLabeltype = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -156,6 +175,9 @@ public class admindashboard extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(102, 102, 102));
         jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel6MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanel6MouseEntered(evt);
             }
@@ -187,6 +209,9 @@ public class admindashboard extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(102, 102, 102));
         jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel7MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanel7MouseEntered(evt);
             }
@@ -279,7 +304,82 @@ public class admindashboard extends javax.swing.JFrame {
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 190, 460));
 
         jLabelname.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jPanel1.add(jLabelname, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 230, 40));
+        jLabelname.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelname.setText("Name: ");
+        jPanel1.add(jLabelname, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, -1, 40));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/pictures/profilepicgui.png"))); // NOI18N
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 50, 50));
+
+        jLabeladdress.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabeladdress.setForeground(new java.awt.Color(255, 255, 255));
+        jLabeladdress.setText("Address: ");
+        jPanel1.add(jLabeladdress, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, -1, -1));
+
+        jLabelemail.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabelemail.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelemail.setText("Email:");
+        jPanel1.add(jLabelemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, -1, -1));
+
+        jLabeltype.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabeltype.setForeground(new java.awt.Color(255, 255, 255));
+        jLabeltype.setText("Role: ");
+        jPanel1.add(jLabeltype, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, -1));
+
+        jPanel9.setBackground(new java.awt.Color(102, 102, 102));
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 420, Short.MAX_VALUE)
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 140, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 420, 140));
+
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel9.setText("Welcome to Airline Management System");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, -1, -1));
+
+        jPanel10.setBackground(new java.awt.Color(102, 102, 102));
+
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("No. of Users");
+
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("0");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel10))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(jLabel11)))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(24, 24, 24))
+        );
+
+        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, 180, 100));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
@@ -289,6 +389,8 @@ public class admindashboard extends javax.swing.JFrame {
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
         loginform login = new loginform();
+        session sess = session.getInstance();
+        sess.logout();
         login.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jPanel8MouseClicked
@@ -340,6 +442,18 @@ public class admindashboard extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jPanel5MouseClicked
 
+    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+        airplanetable at = new airplanetable();
+        at.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jPanel6MouseClicked
+
+    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+        flighttable ft = new flighttable();
+        ft.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jPanel7MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -378,14 +492,22 @@ public class admindashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabeladdress;
+    private javax.swing.JLabel jLabelemail;
     private javax.swing.JLabel jLabelname;
+    private javax.swing.JLabel jLabeltype;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -393,5 +515,6 @@ public class admindashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     // End of variables declaration//GEN-END:variables
 }
