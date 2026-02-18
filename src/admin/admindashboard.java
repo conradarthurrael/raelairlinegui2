@@ -9,6 +9,12 @@ import main.*;
 import config.config;
 import config.session;
 import java.awt.Color;
+import java.awt.Image;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +28,7 @@ public class admindashboard extends javax.swing.JFrame {
     public admindashboard() {
         initComponents();
         session sess = session.getInstance();
+        checkSession();
         jLabelname.setText("Name: "+sess.getusername());
         jLabelemail.setText("Email: "+sess.getuseremail());
         jLabeladdress.setText("Address: "+sess.getuseraddress());
@@ -31,8 +38,35 @@ public class admindashboard extends javax.swing.JFrame {
         java.util.List<java.util.Map<String, Object>> count = con.fetchRecords(countusers);
         Object total = count.get(0).get("total");
         jLabel11.setText(total.toString());
+        String countairplanes = "SELECT COUNT(*) AS total2 FROM table_airplanes";
+        java.util.List<java.util.Map<String, Object>> count2 = con.fetchRecords(countairplanes);
+        Object total2 = count2.get(0).get("total2");
+        jLabel14.setText(total2.toString());
+        String countflights = "SELECT COUNT(*) AS total3 FROM table_flights";
+        java.util.List<java.util.Map<String, Object>> count3 = con.fetchRecords(countflights);
+        Object total3 = count3.get(0).get("total3");
+        jLabel16.setText(total3.toString());
+        String selectpic = "SELECT profile_pic FROM table_users WHERE user_id = ?";
+        java.util.List<java.util.Map<String, Object>> records = con.fetchRecords2(selectpic, sess.getuserid());
+        if(!records.isEmpty()){
+            Object obj = records.get(0).get("profile_pic");
+            if(obj instanceof byte[]){
+                byte[] imagebytes = (byte[]) obj;
+                ImageIcon icon = new ImageIcon(imagebytes);
+                Image img = icon.getImage().getScaledInstance(jLabel8.getWidth(), jLabel8.getHeight(), Image.SCALE_SMOOTH);
+            jLabel8.setIcon(new ImageIcon(img));
+            }
+        }
     }
-    
+    private void checkSession(){
+        session sess = session.getInstance();
+        if(sess.getuserid()==null){
+            this.setVisible(true);
+            JOptionPane.showMessageDialog(this, "Please Log In first!");
+            this.dispose();
+            new loginform().setVisible(true);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,21 +91,31 @@ public class admindashboard extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jLabelname = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabeltype = new javax.swing.JLabel();
         jLabeladdress = new javax.swing.JLabel();
         jLabelemail = new javax.swing.JLabel();
-        jLabeltype = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
+        jLabelname = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(102, 255, 255));
@@ -303,47 +347,101 @@ public class admindashboard extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 190, 460));
 
-        jLabelname.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabelname.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelname.setText("Name: ");
-        jPanel1.add(jLabelname, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, -1, 40));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/pictures/profile.png"))); // NOI18N
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 140, 130));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/pictures/profilepicgui.png"))); // NOI18N
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 50, 50));
-
-        jLabeladdress.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabeladdress.setForeground(new java.awt.Color(255, 255, 255));
-        jLabeladdress.setText("Address: ");
-        jPanel1.add(jLabeladdress, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, -1, -1));
-
-        jLabelemail.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabelemail.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelemail.setText("Email:");
-        jPanel1.add(jLabelemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, -1, -1));
+        jPanel9.setBackground(new java.awt.Color(102, 102, 102));
 
         jLabeltype.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabeltype.setForeground(new java.awt.Color(255, 255, 255));
         jLabeltype.setText("Role: ");
-        jPanel1.add(jLabeltype, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, -1));
 
-        jPanel9.setBackground(new java.awt.Color(102, 102, 102));
+        jLabeladdress.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabeladdress.setForeground(new java.awt.Color(255, 255, 255));
+        jLabeladdress.setText("Address: ");
+
+        jLabelemail.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabelemail.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelemail.setText("Email:");
+
+        jLabelname.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabelname.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelname.setText("Name: ");
+
+        jPanel11.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel11MouseClicked(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Edit Profile");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel12)
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelname)
+                            .addComponent(jLabeladdress)
+                            .addComponent(jLabelemail))
+                        .addGap(0, 331, Short.MAX_VALUE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jLabeltype)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 140, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jLabelname, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelemail)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabeladdress)
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabeltype)))
+                .addGap(22, 22, 22))
         );
 
-        jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 420, 140));
+        jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 430, 150));
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel9.setText("Welcome to Airline Management System");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, -1, -1));
 
         jPanel10.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -365,7 +463,7 @@ public class admindashboard extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addComponent(jLabel10))
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
+                        .addGap(79, 79, 79)
                         .addComponent(jLabel11)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
@@ -376,10 +474,105 @@ public class admindashboard extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(24, 24, 24))
+                .addGap(103, 103, 103))
         );
 
-        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, 180, 100));
+        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 420, 180, 100));
+
+        jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButton1.setText("Change Profile Picture");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, -1, -1));
+
+        jPanel12.setBackground(new java.awt.Color(102, 102, 102));
+
+        jLabel13.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("No. of Airplanes");
+
+        jLabel14.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("0");
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel13))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(jLabel14)))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(94, 94, 94))
+        );
+
+        jPanel1.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 420, 170, 100));
+
+        jPanel13.setBackground(new java.awt.Color(102, 102, 102));
+
+        jLabel15.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("No. of Flights");
+
+        jLabel16.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("0");
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addComponent(jLabel15)
+                .addGap(31, 31, 31))
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(jLabel16)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(15, 15, 15))
+        );
+
+        jPanel1.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 420, 180, 100));
+
+        jPanel14.setBackground(new java.awt.Color(102, 255, 255));
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 340, Short.MAX_VALUE)
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 340, 50));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
@@ -454,6 +647,52 @@ public class admindashboard extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jPanel7MouseClicked
 
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        
+    }//GEN-LAST:event_jLabel8MouseClicked
+    private byte[] imageToBytes(File file) throws Exception{
+        FileInputStream fis = new FileInputStream(file);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int read;
+        while((read = fis.read(buffer))!= -1){
+            bos.write(buffer, 0, read);
+        }
+        fis.close();
+        return bos.toByteArray();
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        session sess = session.getInstance();
+        config con = new config();
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Images", "jpg", "png"));
+        int result = chooser.showOpenDialog(null);
+        if(result == JFileChooser.APPROVE_OPTION){
+           File selectedFile = chooser.getSelectedFile();
+            try{
+                byte[] imageBytes = imageToBytes(selectedFile);
+                String updatepic = "UPDATE table_users SET profile_pic = ? WHERE user_id = ?";
+                Object[] params = {
+                    imageBytes, sess.getuserid()
+                };
+                con.updateRecord2(updatepic, params);
+                JOptionPane.showMessageDialog(null, "Profile Picture Updated Successfully");
+                
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+            ImageIcon icon = new ImageIcon(new ImageIcon(selectedFile.getAbsolutePath()).getImage().getScaledInstance(jLabel8.getWidth(),jLabel8.getHeight(), Image.SCALE_SMOOTH));
+            jLabel8.setIcon(icon);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jPanel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseClicked
+        editprofile ep = new editprofile();
+        ep.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jPanel11MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -491,9 +730,15 @@ public class admindashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -508,6 +753,10 @@ public class admindashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabeltype;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

@@ -1,11 +1,16 @@
 package config;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import net.proteanit.sql.DbUtils;
 
 public class config {
@@ -208,4 +213,67 @@ public class config {
         System.out.println("Error deleting record: " + e.getMessage());
     }
 }
+    public void updateRecord2(String sql, Object... params){
+        try(Connection conn = this.connectDB();
+            PreparedStatement pst = conn.prepareStatement(sql)){
+            for(int i = 0; i < params.length; i++){
+                pst.setObject(i + 1, params[i]);
+            }
+            pst.executeUpdate();
+            pst.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public java.util.List<java.util.Map<String, Object>> fetchRecords2(String sql, Object... params){
+        java.util.List<java.util.Map<String, Object>> list = new ArrayList<>();
+        try(
+         Connection con = this.connectDB();
+         PreparedStatement pst = con.prepareStatement(sql)){
+         for (int i = 0; i < params.length; i++){
+             pst.setObject(i+1, params[i]);
+         }
+         ResultSet rs = pst.executeQuery();
+         ResultSetMetaData meta = rs.getMetaData();
+         int columnCount = meta.getColumnCount();
+         while(rs.next()){
+             java.util.Map<String, Object> row = new HashMap<>();
+             for (int i = 1; i <= columnCount; i++){
+                 String columnName = meta.getColumnName(i);
+                 if(meta.getColumnType(i)==java.sql.Types.BLOB){
+                     row.put(columnName, rs.getBytes(i));
+                 }
+                 else {
+                     row.put(columnName, rs.getObject(i));
+                 }
+             }
+             list.add(row);
+         }
+         rs.close();
+         pst.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+    public void updateRecord3(String sql, Object... params){
+        try(
+            Connection con = this.connectDB();
+            PreparedStatement pst = con.prepareStatement(sql)){
+            for(int i = 0; i < params.length; i++){
+                if(params[i] instanceof FileInputStream){
+                    FileInputStream fis = (FileInputStream) params[i]; pst.setBinaryStream(i + 1, fis);
+                }
+                else {
+                    pst.setObject(i + 1, params[i]);
+                }
+            }
+            pst.executeUpdate();
+            pst.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
