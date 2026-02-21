@@ -20,11 +20,19 @@ public class airplanetable extends javax.swing.JFrame {
     private config con;
     
     public airplanetable() {
+        session sess = session.getInstance();
+        if(sess.getuserid()==null){
+            JOptionPane.showMessageDialog(null, "Please Login First");
+            loginform lf = new loginform();
+            lf.setVisible(true);
+            this.setVisible(false);
+        }else{
         initComponents();
         config con = new config();
         String airplanetable = "SELECT * FROM table_airplanes";
         con.displayData(airplanetable, jTable1);
         jPanel6.setBackground(Color.GRAY);
+        }
     }
     
     /**

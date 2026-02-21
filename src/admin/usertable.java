@@ -10,6 +10,7 @@ import main.*;
 import config.config;
 import config.session;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,11 +22,19 @@ public class usertable extends javax.swing.JFrame {
      * Creates new form dashboard
      */
     public usertable() {
+        session sess = session.getInstance();
+        if(sess.getuserid()==null){
+            JOptionPane.showMessageDialog(null, "Please Login First");
+            loginform lf = new loginform();
+            lf.setVisible(true);
+            this.setVisible(false);
+        }else{
         initComponents();
         config con = new config();
         String usertable = "SELECT user_id,user_name,user_address,user_age,user_email,user_type,user_status FROM table_users";
         con.displayData(usertable, usertable2);
         jPanel5.setBackground(Color.GRAY);
+        }
     }
 
     /**

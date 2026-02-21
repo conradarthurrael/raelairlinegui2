@@ -21,8 +21,14 @@ public class myflights extends javax.swing.JFrame {
     private config con;
     
     public myflights() {
-        initComponents();
         session sess = session.getInstance();
+        if(sess.getuserid()==null){
+            JOptionPane.showMessageDialog(null, "Please Login First");
+            loginform lf = new loginform();
+            lf.setVisible(true);
+            this.setVisible(false);
+        }else{
+        initComponents();
         config con = new config();
         StringBuilder sb = new StringBuilder();
         StringBuilder sb2 = new StringBuilder();
@@ -41,6 +47,7 @@ public class myflights extends javax.swing.JFrame {
             jLabel15.setText("Name: "+sess.getusername());
             jLabel16.setText("Price: "+sb4.toString());
             jLabel17.setText("Transaction #: "+sess.getuserid()+"1184758");
+        }
         }
     }
     
@@ -476,7 +483,7 @@ public class myflights extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel5MouseEntered
 
     private void jPanel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseExited
-        jPanel5.setBackground(Color.GRAY);
+        jPanel5.setBackground(new java.awt.Color(102, 102, 102));
     }//GEN-LAST:event_jPanel5MouseExited
 
     private void jPanel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseEntered

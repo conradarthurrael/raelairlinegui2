@@ -20,11 +20,19 @@ public class flighttable extends javax.swing.JFrame {
     private config con;
     
     public flighttable() {
+        session sess = session.getInstance();
+        if(sess.getuserid()==null){
+            JOptionPane.showMessageDialog(null, "Please Login First");
+            loginform lf = new loginform();
+            lf.setVisible(true);
+            this.setVisible(false);
+        }else{
         initComponents();
         jPanel7.setBackground(Color.GRAY);
         config con = new config();
         String selectflights = "SELECT * FROM table_flights";
         con.displayData(selectflights, jTable1);
+        }
     }
     
     /**
