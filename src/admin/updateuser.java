@@ -18,8 +18,29 @@ public class updateuser extends javax.swing.JFrame {
     /**
      * Creates new form registerform
      */
+    
+    private String userid2;
+    private String username2;
+    private String useraddress2;
+    private String userage2;
+    private String useremail2;
+    private String usercontactno2;
+    private String usertype2;
+    
     public updateuser() {
         initComponents();
+        setdata(userid2, username2, useraddress2, userage2, useremail2, usercontactno2, usertype2);
+        userid.setEditable(false);
+    }
+    
+    public void setdata(String userid2, String username2, String useraddress2, String userage2, String useremail2, String usercontactno2, String usertype2){
+        userid.setText(userid2);
+        name.setText(username2);
+        address.setText(useraddress2);
+        age.setText(userage2);
+        email.setText(useremail2);
+        contactno.setText(usercontactno2);
+        type.setText(usertype2);
     }
 
     /**
@@ -291,7 +312,7 @@ public class updateuser extends javax.swing.JFrame {
        String getcontactno = contactno.getText();
        String gettype = type.getText();
        
-       String emailpattern = "^[A-Za-z0-9+_.-]+@(gmail\\.com|yahoo\\.com|email\\.com)$||''";
+       String emailpattern = "^[A-Za-z0-9+_.-]+@(gmail\\.com|yahoo\\.com|email\\.com|test\\.com|hotmail\\.com)$||''";
         
         if(!getemail.matches(emailpattern)){
             JOptionPane.showMessageDialog(null, "Invalid Email!");
@@ -303,12 +324,7 @@ public class updateuser extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, "All fields are required");
        }
        else{
-           String emailvalidation = "SELECT * FROM table_users WHERE user_email = ?";
-        java.util.List<java.util.Map<String, Object>> result = con.fetchRecords(emailvalidation, getemail);
-        if (!result.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Email already exists. Please enter another email.");
-        }
-        else{
+          
             if(uid.isEmpty()||getname.isEmpty()||getaddress.isEmpty()||getage.isEmpty()||getemail.isEmpty()||getpassword.isEmpty()||getcontactno.isEmpty()||gettype.isEmpty()){
                 JOptionPane.showMessageDialog(null, "All fields are required");
             }
@@ -321,8 +337,7 @@ public class updateuser extends javax.swing.JFrame {
        ut.setVisible(true);
        this.dispose();
             }
-       } 
-        }
+       }
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void typeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeActionPerformed

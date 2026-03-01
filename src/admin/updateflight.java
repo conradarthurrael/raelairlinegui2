@@ -18,8 +18,30 @@ public class updateflight extends javax.swing.JFrame {
     /**
      * Creates new form registerform
      */
+    private String flightid2;
+    private String flightname2;
+    private String departure2;
+    private String flighttime2;
+    private String flightdate2;
+    private String from2;
+    private String to2;
+    private String airplaneid2;
+    private String price2;
     public updateflight() {
         initComponents();
+        setdata2(flightid2, flightname2, departure2, flighttime2, flightdate2, from2, to2, airplaneid2, price2);
+    }
+    
+    public void setdata2(String flightid2, String flightname2, String departure2, String flighttime2, String flightdate2, String from2, String to2, String airplaneid2, String price2){
+       fid.setText(flightid2);
+       name.setText(flightname2);
+       departure.setText(departure2);
+       flighttime.setText(flighttime2);
+       flightdate.setText(flightdate2);
+       flightfrom.setText(from2);
+       flightto.setText(to2);
+       aid.setText(airplaneid2);
+       flightprice.setText(price2);
     }
 
     /**

@@ -26,9 +26,23 @@ public class editprofile extends javax.swing.JFrame {
     private config con;
     
     public editprofile() {
+        session sess = session.getInstance();
+        if(sess.getuserid()==null){
+            JOptionPane.showMessageDialog(null, "Please Login First");
+            loginform lf = new loginform();
+            lf.setVisible(true);
+            this.setVisible(false);
+        } else{
         initComponents();
         jPanel7.setBackground(Color.GRAY);
         config con = new config();
+        name.setText(sess.getusername());
+        address.setText(sess.getuseraddress());
+        age.setText(sess.getuserage());
+        email.setText(sess.getuseremail());
+        contactno.setText(sess.getusercontactno());
+        usertype.setText(sess.getusertype());
+        }
     }
     
     /**
@@ -75,6 +89,7 @@ public class editprofile extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -325,36 +340,43 @@ public class editprofile extends javax.swing.JFrame {
         jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 190, 30));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Name");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, -1, -1));
         jPanel1.add(address, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 190, 30));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Address");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, -1, -1));
         jPanel1.add(age, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 430, 190, 30));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Age");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, -1, -1));
         jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 490, 190, 30));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Email");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, -1, -1));
         jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, 180, 30));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Password");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, -1, -1));
         jPanel1.add(contactno, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 370, 180, 30));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Contact No.");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 340, -1, -1));
         jPanel1.add(usertype, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 430, 180, 30));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Type");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, -1, -1));
 
@@ -394,6 +416,9 @@ public class editprofile extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 90, 50));
+
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/pictures/airlineshot1.png"))); // NOI18N
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 730, 460));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
@@ -617,6 +642,7 @@ public class editprofile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

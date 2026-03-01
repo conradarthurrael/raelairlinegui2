@@ -27,9 +27,23 @@ public class editprofileuser extends javax.swing.JFrame {
     private config con;
     
     public editprofileuser() {
+        session sess = session.getInstance();
+        if(sess.getuserid()==null){
+            JOptionPane.showMessageDialog(null, "Please Login First");
+            loginform lf = new loginform();
+            lf.setVisible(true);
+            this.setVisible(false);
+        } else{
         initComponents();
         jPanel7.setBackground(Color.GRAY);
         config con = new config();
+        name.setText(sess.getusername());
+        address.setText(sess.getuseraddress());
+        age.setText(sess.getuserage());
+        email.setText(sess.getuseremail());
+        contactno.setText(sess.getusercontactno());
+        usertype.setText(sess.getusertype());
+        }
     }
     
     /**
@@ -74,6 +88,7 @@ public class editprofileuser extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -164,7 +179,7 @@ public class editprofileuser extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Users");
+        jLabel4.setText("Tickets");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -173,7 +188,7 @@ public class editprofileuser extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addComponent(jLabel4)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,7 +213,7 @@ public class editprofileuser extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Airplanes");
+        jLabel5.setText("My Flights");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -219,6 +234,9 @@ public class editprofileuser extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(102, 102, 102));
         jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel7MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanel7MouseEntered(evt);
             }
@@ -229,14 +247,14 @@ public class editprofileuser extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Flights");
+        jLabel6.setText("View Info");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(59, 59, 59)
                 .addComponent(jLabel6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -324,36 +342,43 @@ public class editprofileuser extends javax.swing.JFrame {
         jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 190, 30));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Name");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, -1, -1));
         jPanel1.add(address, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 190, 30));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Address");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, -1, -1));
         jPanel1.add(age, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 430, 190, 30));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Age");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, -1, -1));
         jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 490, 190, 30));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Email");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, -1, -1));
         jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, 180, 30));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Password");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, -1, -1));
         jPanel1.add(contactno, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 370, 180, 30));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Contact No.");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 340, -1, -1));
         jPanel1.add(usertype, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 430, 180, 30));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Type");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, -1, -1));
 
@@ -374,6 +399,9 @@ public class editprofileuser extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 490, -1, -1));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/pictures/airlineshot2.png"))); // NOI18N
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 730, 460));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
@@ -431,20 +459,20 @@ public class editprofileuser extends javax.swing.JFrame {
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
         config con = new config();
-        usertable ut = new usertable();
-        ut.setVisible(true);
+        ticket tick = new ticket();
+        tick.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
-        airplanetable at = new airplanetable();
-        at.setVisible(true);
+        myflights mf = new myflights();
+        mf.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-        admindashboard ad = new admindashboard();
-        ad.setVisible(true);
+        userdashboard ud = new userdashboard();
+        ud.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jPanel4MouseClicked
 
@@ -539,6 +567,12 @@ public class editprofileuser extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+        viewinfo vi = new viewinfo();
+    vi.setVisible(true);
+    this.setVisible(false);
+    }//GEN-LAST:event_jPanel7MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -612,6 +646,7 @@ public class editprofileuser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

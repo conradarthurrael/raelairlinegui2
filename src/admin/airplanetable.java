@@ -73,6 +73,7 @@ public class airplanetable extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         getairplanestatus = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -398,6 +399,9 @@ public class airplanetable extends javax.swing.JFrame {
         });
         jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, -1, -1));
 
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/pictures/airlineshot1.png"))); // NOI18N
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 730, 460));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
         pack();
@@ -464,10 +468,18 @@ public class airplanetable extends javax.swing.JFrame {
         String getname = getairplanename.getText();
         String getcapacity = getairplanecapacity.getText();
         String getstatus = getairplanestatus.getText();
+        if(getname.isEmpty()&&getcapacity.isEmpty()&&getstatus.isEmpty()){
+            JOptionPane.showMessageDialog(null, "All fields are required");
+        }
+        else{
         String insertairplane = "INSERT INTO table_airplanes(airplane_name, airplane_capacity, airplane_status)VALUES(?,?,?)";
         con.addRecord(insertairplane, getname, getcapacity, getstatus);
         String refreshairplane = "SELECT * FROM table_airplanes";
        con.displayData(refreshairplane, jTable1);
+       getairplanename.setText("");
+       getairplanecapacity.setText("");
+       getairplanestatus.setText("");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void getairplanenameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getairplanenameActionPerformed
@@ -489,6 +501,8 @@ public class airplanetable extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        config con = new config();
+       int choicedelete2 = JOptionPane.showConfirmDialog(this, "Do you want to delete this airplane?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        if(choicedelete2 == JOptionPane.YES_OPTION){
        int getairplaneid = jTable1.getSelectedRow();
        if(getairplaneid==-1){
            return;
@@ -498,6 +512,10 @@ public class airplanetable extends javax.swing.JFrame {
        con.deleteRecord(deleteairplane, airplaneid);
        String refreshairplane = "SELECT * FROM table_airplanes";
        con.displayData(refreshairplane, jTable1);
+        }
+        else{
+            return;
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -505,6 +523,10 @@ public class airplanetable extends javax.swing.JFrame {
         String getname = getairplanename.getText();
         String getcapacity = getairplanecapacity.getText();
         String getstatus = getairplanestatus.getText();
+        if(getname.isEmpty()&&getcapacity.isEmpty()&&getstatus.isEmpty()){
+            JOptionPane.showMessageDialog(null, "All fields are required");
+        }
+        else{
        int getairplaneid = jTable1.getSelectedRow();
        if(getairplaneid==-1){
            return;
@@ -514,6 +536,10 @@ public class airplanetable extends javax.swing.JFrame {
        con.updateRecord(updateairplane, getname, getcapacity, getstatus, airplaneid);
        String refreshairplane = "SELECT * FROM table_airplanes";
        con.displayData(refreshairplane, jTable1);
+       getairplanename.setText("");
+       getairplanecapacity.setText("");
+       getairplanestatus.setText("");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void textsearchairplaneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textsearchairplaneActionPerformed
@@ -581,6 +607,7 @@ public class airplanetable extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -66,6 +66,7 @@ public class flighttable extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         textsearchflight = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -353,6 +354,10 @@ public class flighttable extends javax.swing.JFrame {
         jButton4.setText("Search");
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 100, -1, -1));
 
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/pictures/airlineshot1.png"))); // NOI18N
+        jLabel8.setText("jLabel8");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 730, 460));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
         pack();
@@ -421,13 +426,30 @@ public class flighttable extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int flightrow = jTable1.getSelectedRow();
+        if(flightrow==-1){
+            JOptionPane.showMessageDialog(null, "Please Select a row");
+        }
+        
+        String flightid2 = jTable1.getValueAt(flightrow, 0).toString();
+        String flightname2 = jTable1.getValueAt(flightrow, 1).toString();
+        String departure2 = jTable1.getValueAt(flightrow, 2).toString();
+        String flighttime2 = jTable1.getValueAt(flightrow, 3).toString();
+        String flightdate2 = jTable1.getValueAt(flightrow, 4).toString();
+        String from2 = jTable1.getValueAt(flightrow, 5).toString();
+        String to2 = jTable1.getValueAt(flightrow, 6).toString();
+        String airplaneid2 = jTable1.getValueAt(flightrow, 7).toString();
+        String price2 = jTable1.getValueAt(flightrow, 8).toString();
         updateflight uf = new updateflight();
+        uf.setdata2(flightid2, flightname2, departure2, flighttime2, flightdate2, from2, to2, airplaneid2, price2);
         uf.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
              config con = new config();
+             int choicedelete3 = JOptionPane.showConfirmDialog(this, "Do you want to delete this flight?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        if(choicedelete3 == JOptionPane.YES_OPTION){
        int getflightid = jTable1.getSelectedRow();
        if(getflightid==-1){
            return;
@@ -437,6 +459,10 @@ public class flighttable extends javax.swing.JFrame {
        con.deleteRecord(deleteairplane, flightid);
        String refreshflight = "SELECT * FROM table_flights";
        con.displayData(refreshflight, jTable1);
+        }
+        else{
+            return;
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void textsearchflightKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textsearchflightKeyReleased
@@ -508,6 +534,7 @@ public class flighttable extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

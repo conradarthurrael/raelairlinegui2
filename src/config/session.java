@@ -6,6 +6,8 @@ public class session {
   private String useraddress;
   private String usertype;
   private String userid;
+  private String userage;
+  private String usercontactno;
   
     public static session getInstance(){
         if(instance == null){
@@ -43,6 +45,18 @@ public class session {
     }
     public void setuserid(String userid){
         this.userid = userid;
+    }
+    public String getuserage(){
+        return userage;
+    }
+    public void setuserage(String userage){
+        this.userage = userage;
+    }
+    public String getusercontactno(){
+        return usercontactno;
+    }
+    public void setusercontactno(String usercontactno){
+        this.usercontactno = usercontactno;
     }
     public void logout(){
         instance = null;

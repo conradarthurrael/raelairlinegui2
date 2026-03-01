@@ -168,12 +168,16 @@ public class loginform extends javax.swing.JFrame {
                         String getuseraddress = getinfo.get("user_address").toString();
                         String getusertype = getinfo.get("user_type").toString();
                         String getuserid = getinfo.get("user_id").toString();
+                        String getuserage = getinfo.get("user_age").toString();
+                        String getusercontactno = getinfo.get("user_contactno").toString();
                         session sess = session.getInstance();
                         sess.setusername(getusername);
                         sess.setuseremail(getemail);
                         sess.setuseraddress(getuseraddress);
                         sess.setusertype(getusertype);
                         sess.setuserid(getuserid);
+                        sess.setuserage(getuserage);
+                        sess.setusercontactno(getusercontactno);
                         String type = "SELECT user_type FROM table_users";
                         java.util.List<java.util.Map<String,Object>> type2 = con.fetchRecords(type);
                         java.util.Map<String, Object> user2 = result.get(0);

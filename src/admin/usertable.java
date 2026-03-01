@@ -31,7 +31,7 @@ public class usertable extends javax.swing.JFrame {
         }else{
         initComponents();
         config con = new config();
-        String usertable = "SELECT user_id,user_name,user_address,user_age,user_email,user_type,user_status FROM table_users";
+        String usertable = "SELECT user_id,user_name,user_address,user_age,user_email,user_contactno, user_type,user_status FROM table_users";
         con.displayData(usertable, usertable2);
         jPanel5.setBackground(Color.GRAY);
         }
@@ -70,6 +70,7 @@ public class usertable extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -317,6 +318,11 @@ public class usertable extends javax.swing.JFrame {
 
             }
         ));
+        usertable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                usertable2MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(usertable2);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 710, 380));
@@ -382,6 +388,9 @@ public class usertable extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(533, 100, 100, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/pictures/airlineshot1.png"))); // NOI18N
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 730, 460));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
@@ -454,13 +463,27 @@ public class usertable extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int row = usertable2.getSelectedRow();
+        if(row==-1){
+            JOptionPane.showMessageDialog(null, "Please click a row first");
+        }
+        String userid2 = usertable2.getValueAt(row, 0).toString();
+        String username2 = usertable2.getValueAt(row, 1).toString();
+        String useraddress2 = usertable2.getValueAt(row, 2).toString();
+        String userage2 = usertable2.getValueAt(row, 3).toString();
+        String useremail2 = usertable2.getValueAt(row, 4).toString();
+        String usercontactno2 = usertable2.getValueAt(row, 5).toString();
+        String usertype2 = usertable2.getValueAt(row, 6).toString();
         updateuser uu = new updateuser();
+        uu.setdata(userid2, username2, useraddress2, userage2, useremail2, usercontactno2, usertype2);
         uu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         config con = new config();
+        int choicedelete = JOptionPane.showConfirmDialog(this, "Do you want to delete this user?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        if(choicedelete == JOptionPane.YES_OPTION){
        int getuserid = usertable2.getSelectedRow();
        if(getuserid==-1){
            return;
@@ -470,6 +493,10 @@ public class usertable extends javax.swing.JFrame {
        con.deleteRecord(deleteuser, uid);
        String refreshusertable = "SELECT user_id,user_name,user_address,user_age,user_email,user_type,user_status FROM table_users";
         con.displayData(refreshusertable, usertable2);
+        }
+        else{
+            return;
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -497,6 +524,8 @@ public class usertable extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
        config con = new config();
+       int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to approve this user?", "Confirm Approve", JOptionPane.YES_NO_OPTION);
+       if(choice == JOptionPane.YES_OPTION){
        int getuserid = usertable2.getSelectedRow();
        if(getuserid==-1){
            return;
@@ -504,12 +533,18 @@ public class usertable extends javax.swing.JFrame {
        int uid = Integer.parseInt(usertable2.getValueAt(getuserid, 0).toString());
        String approveuser = "UPDATE table_users SET user_status = ? WHERE user_id = ?";
        con.updateRecord(approveuser,"Approved", uid);
-       String refreshusertable = "SELECT user_id,user_name,user_address,user_age,user_email,user_type,user_status FROM table_users";
+       String refreshusertable = "SELECT user_id,user_name,user_address,user_age,user_email,user_contactno, user_type,user_status FROM table_users";
         con.displayData(refreshusertable, usertable2);
+       }
+       else{
+           return;
+       }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         config con = new config();
+        int choicedisable = JOptionPane.showConfirmDialog(this, "Do you want to disable this user?", "Confirm Disable", JOptionPane.YES_NO_OPTION);
+        if(choicedisable == JOptionPane.YES_OPTION){
        int getuserid = usertable2.getSelectedRow();
        if(getuserid==-1){
            return;
@@ -517,9 +552,17 @@ public class usertable extends javax.swing.JFrame {
        int uid = Integer.parseInt(usertable2.getValueAt(getuserid, 0).toString());
        String disableuser = "UPDATE table_users SET user_status = ? WHERE user_id = ?";
        con.updateRecord(disableuser,"Disabled", uid);
-       String refreshusertable = "SELECT user_id,user_name,user_address,user_age,user_email,user_type,user_status FROM table_users";
+       String refreshusertable = "SELECT user_id,user_name,user_address,user_age,user_email,user_contactno,user_type,user_status FROM table_users";
         con.displayData(refreshusertable, usertable2);
+        }
+        else{
+            return;
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void usertable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usertable2MouseClicked
+  
+    }//GEN-LAST:event_usertable2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -573,6 +616,7 @@ public class usertable extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
