@@ -5,6 +5,9 @@
  */
 package main;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Conrad Arthur Rael
@@ -16,6 +19,8 @@ public class welcome extends javax.swing.JFrame {
      */
     public welcome() {
         initComponents();
+        Image icon = new ImageIcon(getClass().getResource("/images/airlineshot1.png")).getImage();
+        setIconImage(icon);
     }
 
     /**

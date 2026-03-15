@@ -7,6 +7,8 @@ package admin;
 
 import main.*;
 import config.config;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,6 +31,8 @@ public class updateflight extends javax.swing.JFrame {
     private String price2;
     public updateflight() {
         initComponents();
+        Image icon2 = new ImageIcon(getClass().getResource("/images/airlineshot1.png")).getImage();
+        setIconImage(icon2);
         setdata2(flightid2, flightname2, departure2, flighttime2, flightdate2, from2, to2, airplaneid2, price2);
     }
     

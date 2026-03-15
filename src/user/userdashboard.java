@@ -36,6 +36,8 @@ public class userdashboard extends javax.swing.JFrame {
         }
         else{
         initComponents();
+        Image icon2 = new ImageIcon(getClass().getResource("/images/airlineshot1.png")).getImage();
+        setIconImage(icon2);
         config con = new config();
         jLabelname.setText("Name: "+sess.getusername());
         jLabelemail.setText("Email: "+sess.getuseremail());
@@ -56,6 +58,10 @@ public class userdashboard extends javax.swing.JFrame {
         java.util.List<java.util.Map<String, Object>> count3 = con.fetchRecords(countflights);
         Object total3 = count3.get(0).get("total3");
         jLabel12.setText(total3.toString());
+        jButton1.setContentAreaFilled(false);
+        jButton1.setOpaque(true);
+        jButton1.setBackground(Color.BLACK);
+        jButton1.setForeground(Color.WHITE);
         }
     }
     
@@ -335,27 +341,23 @@ public class userdashboard extends javax.swing.JFrame {
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 190, 460));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/pictures/profile.png"))); // NOI18N
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 120, 130));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 150, 130));
 
-        jPanel9.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel9.setBackground(new java.awt.Color(153, 255, 255));
 
         jLabeltype.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabeltype.setForeground(new java.awt.Color(255, 255, 255));
         jLabeltype.setText("Role: ");
 
         jLabeladdress.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabeladdress.setForeground(new java.awt.Color(255, 255, 255));
         jLabeladdress.setText("Address: ");
 
         jLabelemail.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabelemail.setForeground(new java.awt.Color(255, 255, 255));
         jLabelemail.setText("Email:");
 
         jLabelname.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabelname.setForeground(new java.awt.Color(255, 255, 255));
         jLabelname.setText("Name: ");
 
-        jPanel10.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel10.setBackground(new java.awt.Color(102, 255, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -364,7 +366,6 @@ public class userdashboard extends javax.swing.JFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Edit Profile");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -419,7 +420,7 @@ public class userdashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 540, 160));
+        jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 540, 160));
 
         jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton1.setText("Change Profile Picture");
@@ -428,7 +429,7 @@ public class userdashboard extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel10.setText("Welcome to Airline Management System");
@@ -449,14 +450,12 @@ public class userdashboard extends javax.swing.JFrame {
 
         jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, 330, 50));
 
-        jPanel12.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel12.setBackground(new java.awt.Color(153, 255, 255));
 
         jLabel11.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Available Flights");
 
         jLabel12.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("0");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -482,12 +481,12 @@ public class userdashboard extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 180, -1));
+        jPanel1.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 420, 180, -1));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/pictures/airlineshot2.png"))); // NOI18N
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 730, 460));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 540));
 
         pack();
         setLocationRelativeTo(null);

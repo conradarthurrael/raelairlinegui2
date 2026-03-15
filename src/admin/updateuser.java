@@ -7,6 +7,8 @@ package admin;
 
 import main.*;
 import config.config;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,6 +31,8 @@ public class updateuser extends javax.swing.JFrame {
     
     public updateuser() {
         initComponents();
+        Image icon2 = new ImageIcon(getClass().getResource("/images/airlineshot1.png")).getImage();
+        setIconImage(icon2);
         setdata(userid2, username2, useraddress2, userage2, useremail2, usercontactno2, usertype2);
         userid.setEditable(false);
     }

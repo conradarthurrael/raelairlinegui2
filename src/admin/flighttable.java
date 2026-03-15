@@ -9,6 +9,8 @@ import main.*;
 import config.config;
 import config.session;
 import java.awt.Color;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,6 +30,8 @@ public class flighttable extends javax.swing.JFrame {
             this.setVisible(false);
         }else{
         initComponents();
+        Image icon2 = new ImageIcon(getClass().getResource("/images/airlineshot1.png")).getImage();
+        setIconImage(icon2);
         jPanel7.setBackground(Color.GRAY);
         config con = new config();
         String selectflights = "SELECT * FROM table_flights";
@@ -354,11 +358,11 @@ public class flighttable extends javax.swing.JFrame {
         jButton4.setText("Search");
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 100, -1, -1));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/pictures/airlineshot1.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/pictures/airlineshot2.png"))); // NOI18N
         jLabel8.setText("jLabel8");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 730, 460));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 540));
 
         pack();
         setLocationRelativeTo(null);

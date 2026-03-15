@@ -7,6 +7,8 @@ package admin;
 
 import main.*;
 import config.config;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +22,8 @@ public class adduser extends javax.swing.JFrame {
      */
     public adduser() {
         initComponents();
+        Image icon = new ImageIcon(getClass().getResource("/images/airlineshot1.png")).getImage();
+        setIconImage(icon);
     }
 
     /**

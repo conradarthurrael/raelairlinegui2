@@ -10,6 +10,8 @@ import main.*;
 import config.config;
 import config.session;
 import java.awt.Color;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,6 +31,8 @@ public class viewinfo extends javax.swing.JFrame {
             this.setVisible(false);
         }else{
         initComponents();
+        Image icon2 = new ImageIcon(getClass().getResource("/images/airlineshot1.png")).getImage();
+        setIconImage(icon2);
         jPanel7.setBackground(Color.GRAY);
         }
     }
@@ -305,7 +309,7 @@ public class viewinfo extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 190, 460));
 
-        jPanel9.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel9.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -377,7 +381,7 @@ public class viewinfo extends javax.swing.JFrame {
 
         jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 600, 240));
 
-        jPanel10.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel10.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel15.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
@@ -416,7 +420,7 @@ public class viewinfo extends javax.swing.JFrame {
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/pictures/airlineshot2.png"))); // NOI18N
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 730, 460));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 540));
 
         pack();
         setLocationRelativeTo(null);

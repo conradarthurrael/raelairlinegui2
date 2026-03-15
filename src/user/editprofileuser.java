@@ -35,7 +35,8 @@ public class editprofileuser extends javax.swing.JFrame {
             this.setVisible(false);
         } else{
         initComponents();
-        jPanel7.setBackground(Color.GRAY);
+        Image icon2 = new ImageIcon(getClass().getResource("/images/airlineshot1.png")).getImage();
+        setIconImage(icon2);
         config con = new config();
         name.setText(sess.getusername());
         address.setText(sess.getuseraddress());
@@ -43,6 +44,10 @@ public class editprofileuser extends javax.swing.JFrame {
         email.setText(sess.getuseremail());
         contactno.setText(sess.getusercontactno());
         usertype.setText(sess.getusertype());
+        jButton1.setContentAreaFilled(false);
+        jButton1.setOpaque(true);
+        jButton1.setBackground(Color.BLACK);
+        jButton1.setForeground(Color.WHITE);
         }
     }
     
@@ -403,7 +408,7 @@ public class editprofileuser extends javax.swing.JFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/pictures/airlineshot2.png"))); // NOI18N
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 730, 460));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 540));
 
         pack();
         setLocationRelativeTo(null);
@@ -430,7 +435,7 @@ public class editprofileuser extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel7MouseEntered
 
     private void jPanel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseExited
-        jPanel7.setBackground(Color.GRAY);
+        jPanel7.setBackground(new java.awt.Color(102, 102, 102));
     }//GEN-LAST:event_jPanel7MouseExited
 
     private void jPanel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseEntered
@@ -500,12 +505,6 @@ public class editprofileuser extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, "All fields are required");
        }
        else{
-           String emailvalidation = "SELECT * FROM table_users WHERE user_email = ?";
-        java.util.List<java.util.Map<String, Object>> result = con.fetchRecords(emailvalidation, getemail);
-        if (!result.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Email already exists. Please enter another email.");
-        }
-        else{
             if(uid.isEmpty()||getname.isEmpty()||getaddress.isEmpty()||getage.isEmpty()||getemail.isEmpty()||getpassword.isEmpty()||getcontactno.isEmpty()||gettype.isEmpty()){
                 JOptionPane.showMessageDialog(null, "All fields are required");
             }
@@ -522,8 +521,7 @@ public class editprofileuser extends javax.swing.JFrame {
        ud.setVisible(true);
        this.dispose();
             }
-       } 
-        }
+       }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

@@ -9,6 +9,8 @@ import admin.*;
 import main.*;
 import config.config;
 import config.session;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,10 +24,14 @@ public class purchaseticket extends javax.swing.JFrame {
      */
     public purchaseticket() {
         initComponents();
+        Image icon2 = new ImageIcon(getClass().getResource("/images/airlineshot1.png")).getImage();
+        setIconImage(icon2);
         session sess = session.getInstance();
         jLabel6.setText("Your user ID is "+sess.getuserid());
     }
-
+    public void setflightid(String flightid){
+        fid.setText(flightid);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

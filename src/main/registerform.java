@@ -6,6 +6,8 @@
 package main;
 
 import config.config;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +21,8 @@ public class registerform extends javax.swing.JFrame {
      */
     public registerform() {
         initComponents();
+        Image icon = new ImageIcon(getClass().getResource("/images/airlineshot1.png")).getImage();
+        setIconImage(icon);
     }
 
     /**
